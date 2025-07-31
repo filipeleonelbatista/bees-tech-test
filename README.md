@@ -1,69 +1,73 @@
-# React + TypeScript + Vite
+# BEES Tech Test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre o Projeto
 
-Currently, two official plugins are available:
+Este projeto é uma aplicação web para busca e gerenciamento de bares, desenvolvida como parte de um teste técnico. A aplicação permite que usuários se autentiquem, pesquisem bares e salvem seus favoritos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- React + TypeScript + Vite
+- Tailwind CSS
+- Context API (migrado de Redux)
+- React Router
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Arquitetura
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+A aplicação segue os princípios de Clean Architecture, com separação clara de responsabilidades:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Presentation Layer**: Componentes React
+- **State Management**: Context API
+- **Domain Layer**: Tipos e interfaces
+- **Data Layer**: Persistência com localStorage
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Para mais detalhes sobre a arquitetura, consulte o arquivo [architecture.md](./architecture.md).
+
+## Migração de Redux para Context API
+
+A aplicação foi originalmente desenvolvida usando Redux e Redux-Saga para gerenciamento de estado. Foi realizada uma migração para Context API para simplificar a arquitetura e reduzir dependências.
+
+### Benefícios da Migração
+
+- **Código mais simples**: Menos boilerplate e configuração
+- **Melhor coesão**: Lógica de negócio mais próxima dos componentes
+- **Menor bundle size**: Menos dependências externas
+- **Melhor testabilidade**: Componentes mais isolados e focados
+
+## Estrutura de Pastas
+
+```
+src/
+├── components/     # Componentes reutilizáveis
+├── contexts/       # Contextos para gerenciamento de estado
+├── hooks/          # Hooks personalizados
+├── pages/          # Páginas da aplicação
+├── types/          # Tipos e interfaces
+└── utils/          # Funções utilitárias
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Funcionalidades
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Autenticação**: Login simples com verificação de idade
+- **Pesquisa de Bares**: Busca por nome, endereço ou localização
+- **Gerenciamento de Favoritos**: Adicionar e remover bares favoritos
+- **Persistência de Dados**: Dados salvos no localStorage
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Como Executar
+
+```bash
+# Instalar dependências
+npm install
+
+# Executar em modo de desenvolvimento
+npm run dev
+
+# Construir para produção
+npm run build
 ```
+
+## Próximos Passos
+
+- Implementar testes unitários e de integração
+- Adicionar documentação de componentes com Storybook
+- Melhorar a acessibilidade da aplicação
+- Implementar internacionalização

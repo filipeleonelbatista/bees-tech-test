@@ -1,6 +1,6 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
@@ -11,6 +11,7 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   size = 'md',
   fullWidth = false,
+  disabled,
   ...props
 }) => {
   const getVariantClasses = () => {
@@ -37,15 +38,19 @@ const Button: React.FC<ButtonProps> = ({
     }
   };
 
+  const disabledClasses = disabled ? 'bg-gray-600 cursor-not-allowed pointer-events-none' : '';
+
   return (
     <button
       className={`
         ${getVariantClasses()}
         ${getSizeClasses()}
         ${fullWidth ? 'w-full' : ''}
+        ${disabledClasses}
         rounded font-medium focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50
         transition-colors duration-200 ease-in-out
       `}
+      disabled={disabled}
       {...props}
     >
       {children}

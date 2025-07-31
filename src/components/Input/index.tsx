@@ -1,10 +1,6 @@
-import React, { InputHTMLAttributes } from 'react';
+import React from 'react';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-}
-
-const Input: React.FC<InputProps> = ({ label, ...props }) => {
+const Input: React.FC<InputProps> = ({ label, error, ...props }) => {
   return (
     <div className="relative w-full">
       {label && (
@@ -14,10 +10,11 @@ const Input: React.FC<InputProps> = ({ label, ...props }) => {
       )}
       <div className="relative">
         <input
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+          className={`w-full bg-white px-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent`}
           {...props}
         />
       </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 };

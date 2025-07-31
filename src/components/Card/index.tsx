@@ -1,19 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Badge from '../Badge';
 import { FiPlus, FiX } from 'react-icons/fi';
-
-interface CardProps {
-  title: string;
-  address?: string;
-  location?: string;
-  badges?: Array<{
-    text: string;
-    type: 'micro' | 'zipcode' | 'phone';
-  }>;
-  children?: ReactNode;
-  onAdd?: () => void;
-  onRemove?: () => void;
-}
 
 const Card: React.FC<CardProps> = ({
   title,
