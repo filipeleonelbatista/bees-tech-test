@@ -4,6 +4,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
+interface NavbarProps {
+  userName: string;
+  onLogout: () => void;
+}
+
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   checked: boolean;
