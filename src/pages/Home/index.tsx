@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Button, Checkbox, Input } from '../../components';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Checkbox, Input } from '../../components';
+import { useUser } from '../../contexts/UserContext';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [isAdult, setIsAdult] = useState(false);
+  const { name, setName, isAdult, setIsAdult } = useUser();
   const [nameError, setNameError] = useState('');
   const [ageError, setAgeError] = useState('');
 
@@ -60,9 +60,20 @@ const Home: React.FC = () => {
     const isAgeValid = validateAge(isAdult);
 
     if (isNameValid && isAgeValid) {
+      localStorage.setItem('user', JSON.stringify({ name, isAdult }));
       navigate('/places');
     }
   };
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const { name, isAdult } = JSON.parse(user);
+      setName(name);
+      setIsAdult(isAdult);
+      navigate('/places');
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-yellow-300/80 flex flex-col justify-center items-center p-4 relative">

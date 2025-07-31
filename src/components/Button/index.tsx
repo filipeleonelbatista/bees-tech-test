@@ -47,6 +47,7 @@ const Button: React.FC<ButtonProps> = ({
         ${getSizeClasses()}
         ${fullWidth ? 'w-full' : ''}
         ${disabledClasses}
+        cursor-pointer
         rounded font-medium focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50
         transition-colors duration-200 ease-in-out
       `}

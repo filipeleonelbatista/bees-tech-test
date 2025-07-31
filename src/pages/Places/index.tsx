@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button, Input } from "../../components";
 import Navbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext";
 
 const Places: React.FC = () => {
-
+    const navigate = useNavigate();
+    const { name } = useUser();
     const [query, setQuery] = useState('');
 
     const handleSearch = () => {
@@ -12,16 +15,18 @@ const Places: React.FC = () => {
 
     const handleLogout = () => {
         console.log('Logout');
+        localStorage.removeItem('user');
+        navigate('/');
     };
 
     return (
         <div className="min-h-screen bg-[#fefaf0] text-black">
-            <Navbar userName="Fulano" onLogout={handleLogout} />
+            <Navbar userName={name} onLogout={handleLogout} />
 
-            <main className="max-w-3xl mx-auto px-4 py-8 space-y-10">
+            <main className="max-w-6xl mx-auto px-4 py-8 space-y-10">
                 <section>
                     <h2 className="text-4xl font-bold mb-6">Your favorite breweries</h2>
-                    <p className="text-center text-sm text-gray-700 my-44">
+                    <p className="text-center text-lg text-gray-700 my-44">
                         {`You don’t have any favorite brewery :(`}
                     </p>
                 </section>
@@ -45,7 +50,7 @@ const Places: React.FC = () => {
                     </div>
                 </section>
 
-                <p className="text-center text-sm text-gray-700 my-44">
+                <p className="text-center text-lg text-gray-700 my-44">
                     Search for a brewery to see the results
                 </p>
             </main>

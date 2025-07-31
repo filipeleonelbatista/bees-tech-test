@@ -10,14 +10,14 @@ const Navbar: React.FC<NavbarProps> = ({ userName, onLogout }) => {
     >
       <button
         onClick={onLogout}
-        className="flex items-center gap-1 hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-full px-2 py-1"
+        className="flex cursor-pointer items-center gap-1 hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-full px-2 py-1"
         aria-label="Logout"
       >
-        <FiArrowLeftCircle className="w-4 h-4" />
-        <span className="text-sm font-medium">Logout</span>
+        <FiArrowLeftCircle className="w-8 h-8 mr-2" />
+        <span className="text-2xl font-medium">Logout</span>
       </button>
 
-      <span className="text-sm font-medium" aria-label={`Logged in as ${userName}`}>
+      <span className="text-2xl font-medium" aria-label={`Logged in as ${userName}`}>
         Hi, {userName}
       </span>
     </nav>

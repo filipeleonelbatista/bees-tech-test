@@ -118,3 +118,19 @@ interface SearchContextType {
   searchBars: (term: string) => void;
   setSearchTerm: (term: string) => void;
 }
+
+export interface Brewery {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
+
+interface UserContextProps {
+  name: string;
+  setName: (name: string) => void;
+  isAdult: boolean;
+  setIsAdult: (isAdult: boolean) => void;
+  breweryFavorites: Brewery[];
+  addFavorite: (brewery: Brewery) => void;
+  removeFavorite: (id: string) => void;
+}
