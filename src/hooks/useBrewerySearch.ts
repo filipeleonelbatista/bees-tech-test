@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export interface Brewery {
     id: string;
@@ -11,28 +11,22 @@ export const useBrewerySearch = () => {
     const [results, setResults] = useState<Brewery[]>([]);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => {
-            if (search.trim() !== '') {
-                setLoading(true);
-                fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${encodeURIComponent(search)}`, {
-                    signal: controller.signal,
-                })
-                    .then(res => res.json())
-                    .then(setResults)
-                    .catch(() => setResults([]))
-                    .finally(() => setLoading(false));
-            } else {
-                setResults([]);
-            }
-        }, 500); 
+    const handleSearch = async () => {
+        setLoading(true)
+        try {
+            const res = await fetch(
+                `https://cors-anywhere-filipeleonelbatista.onrender.com/https://api.openbrewerydb.org/v1/breweries/search?per_page=6&query=${encodeURIComponent(search)}`
+            );
+            const data = await res.json();
+            setResults(data);
+        } catch {
+            setResults([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        return () => {
-            clearTimeout(timeout);
-            controller.abort();
-        };
-    }, [search]);
 
-    return { search, setSearch, results, loading };
+
+    return { search, setSearch, results, loading, handleSearch };
 };

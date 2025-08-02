@@ -1,6 +1,14 @@
 import React from 'react';
+import { BsTrashFill } from 'react-icons/bs';
+import { FiPlusCircle } from 'react-icons/fi';
+import type { CardProps } from '../../types';
 import Badge from '../Badge';
-import { FiPlus, FiX } from 'react-icons/fi';
+
+const BadgeType = [
+  'micro',
+  'zipcode',
+  'phone',
+]
 
 const Card: React.FC<CardProps> = ({
   title,
@@ -12,47 +20,47 @@ const Card: React.FC<CardProps> = ({
   onRemove,
 }) => {
   return (
-    <div className="border border-gray-200 rounded-lg p-4 w-full max-w-md bg-white shadow-sm">
+    <div className="border border-gray-800 rounded-sm p-3 w-full max-w-md bg-white">
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
         <div className="flex space-x-2">
           {onRemove && (
-            <button 
+            <button
               onClick={onRemove}
-              className="text-gray-400 hover:text-gray-600 focus:outline-none"
+              className="text-gray-800 hover:text-gray-400 cursor-pointer focus:outline-none"
               aria-label="Remove"
             >
-              <FiX className="w-5 h-5" />
+              <BsTrashFill className="w-6 h-6" />
             </button>
           )}
           {onAdd && (
-            <button 
+            <button
               onClick={onAdd}
-              className="text-gray-400 hover:text-gray-600 focus:outline-none"
+              className="text-gray-800 hover:text-gray-400 cursor-pointer focus:outline-none"
               aria-label="Add"
             >
-              <FiPlus className="w-5 h-5" />
+              <FiPlusCircle className="w-6 h-6" />
             </button>
           )}
         </div>
       </div>
-      
+
       {address && (
-        <p className="text-sm text-gray-600 mb-1">{address}</p>
+        <p className="text-[16px] text-gray-600 mb-1">{address}</p>
       )}
-      
+
       {location && (
-        <p className="text-sm text-gray-500 mb-3">{location}</p>
+        <p className="text-[16px] text-gray-500 mb-3">{location}</p>
       )}
-      
+
       {badges.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-2">
+        <div className="flex flex-wrap gap-2 mt-6">
           {badges.map((badge, index) => (
-            <Badge key={index} text={badge.text} type={badge.type} />
+            <Badge key={index} text={badge} type={BadgeType[index]} />
           ))}
         </div>
       )}
-      
+
       {children && (
         <div className="mt-3">
           {children}

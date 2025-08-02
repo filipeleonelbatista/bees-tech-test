@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "name": "Sample Brewery 1",
+    "street": "123 Main St",
+    "city": "Sample City",
+    "state": "Sample State",
+    "country": "United States",
+    "brewery_type": "micro",
+    "postal_code": "12345",
+    "phone": "555-0123"
+  },
+  {
+    "id": "2",
+    "name": "Sample Brewery 2",
+    "street": "456 Oak Ave",
+    "city": "Another City",
+    "state": "Another State",
+    "country": "United States",
+    "brewery_type": "brewpub",
+    "postal_code": "67890",
+    "phone": "555-0456"
+  }
+]

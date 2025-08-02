@@ -31,21 +31,13 @@ interface CardProps {
   title: string;
   address?: string;
   location?: string;
-  badges?: Array<{
-    text: string;
-    type: 'micro' | 'zipcode' | 'phone';
-  }>;
+  badges?: string[];
   children?: React.ReactNode;
   onAdd?: () => void;
   onRemove?: () => void;
 }
 
-interface CheckboxProps {
-  label: string;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-  error?: string;
-}
+// Remove a duplicação de CheckboxProps aqui
 
 interface LoadingProps {
   size?: 'sm' | 'md' | 'lg';

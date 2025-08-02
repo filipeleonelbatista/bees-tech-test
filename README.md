@@ -22,16 +22,6 @@ A aplicação segue os princípios de Clean Architecture, com separação clara 
 
 Para mais detalhes sobre a arquitetura, consulte o arquivo [architecture.md](./architecture.md).
 
-## Migração de Redux para Context API
-
-A aplicação foi originalmente desenvolvida usando Redux e Redux-Saga para gerenciamento de estado. Foi realizada uma migração para Context API para simplificar a arquitetura e reduzir dependências.
-
-### Benefícios da Migração
-
-- **Código mais simples**: Menos boilerplate e configuração
-- **Melhor coesão**: Lógica de negócio mais próxima dos componentes
-- **Menor bundle size**: Menos dependências externas
-- **Melhor testabilidade**: Componentes mais isolados e focados
 
 ## Estrutura de Pastas
 
