@@ -1,0 +1,38 @@
+name: CI - Testes
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - '**'   # opcional: roda em qualquer branch
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Instalar dependências
+      run: npm install
+
+    - name: Rodar testes unitários (vitest)
+      run: npm test
+
+    - name: Rodar testes e2e (cypress)
+      uses: cypress-io/github-action@v7
+      with:
+        start: npm run dev
+        wait-on: 'http://localhost:5173'
+        wait-on-timeout: 60 # espera até 60 segundos pelo servidor
+        browser: chrome
+        command: npm run test:e2e
