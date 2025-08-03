@@ -15,7 +15,9 @@ const Loading: React.FC<LoadingProps> = ({ size = 'md', fullScreen = false }) =>
   };
 
   const spinner = (
-    <div className={`animate-spin rounded-full border-t-2 border-b-2 border-yellow-400 ${getSizeClass()}`}></div>
+    <div className={`animate-spin rounded-full border-t-2 border-b-2 border-yellow-400 ${getSizeClass()}`}>
+      <img src="/logo.png" alt="Logo Bees" className='w-12 h-12' />
+    </div>
   );
 
   if (fullScreen) {

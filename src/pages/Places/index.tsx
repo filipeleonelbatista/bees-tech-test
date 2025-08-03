@@ -1,17 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Input } from "../../components";
+import { Button, Card, Input, Loading } from "../../components";
 import Navbar from "../../components/Navbar";
 import { useUser } from "../../contexts/UserContext";
 import { useBrewerySearch } from "../../hooks/useBrewerySearch";
+import { useEffect } from "react";
 
 const Places: React.FC = () => {
     const navigate = useNavigate();
-    const { name, addFavorite, removeFavorite, breweryFavorites } = useUser();
+    const { name, isAdult, addFavorite, removeFavorite, breweryFavorites } = useUser();
     const { search, setSearch, results, loading, handleSearch } = useBrewerySearch();
 
     const handleLogout = () => {
         console.log('Logout');
-        localStorage.removeItem('user');
+        localStorage.clear();
         navigate('/');
     };
 
@@ -25,7 +26,7 @@ const Places: React.FC = () => {
 
                     {
                         breweryFavorites.length > 0 ? (
-                            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                            <div data-cy="favorites-section" className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                                 {breweryFavorites.map((brewery) => (
                                     <Card
                                         key={brewery.id}
@@ -63,10 +64,11 @@ const Places: React.FC = () => {
                         </div>
                     </div>
                 </section>
-
                 {
-                    results.length > 0 ? (
-                        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                    loading ? (
+                        <Loading fullScreen={false} size="lg" />
+                    ) : results.length > 0 ? (
+                        <div data-cy="results-section" className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                             {results.map((result) => (
                                 <Card
                                     key={result.id}

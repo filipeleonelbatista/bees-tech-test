@@ -1,9 +1,10 @@
 describe('Brewery Search', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.get('input[type="text"]').type('John Doe');
-    cy.get('input[type="checkbox"]').click();
+    cy.get('input[id="name"]').type('John Doe');
+    cy.get('label[for="age"]').click();
     cy.get('button').click();
+    cy.wait(500);
   });
 
   it('should display search interface', () => {
@@ -12,18 +13,19 @@ describe('Brewery Search', () => {
   });
 
   it('should search for breweries', () => {
-    cy.intercept('GET', '**/breweries/search**', {
+    cy.intercept('GET', '**/api.openbrewerydb.org/**', {
       fixture: 'breweries.json'
     }).as('searchBreweries');
 
     cy.get('input[aria-label="Search brewery"]').type('brewery');
+    cy.get('button').contains('Search').click();
     cy.wait('@searchBreweries');
     
     cy.get('[data-cy="brewery-card"]').should('have.length.gt', 0);
   });
 
   it('should display brewery information in cards', () => {
-    cy.intercept('GET', '**/breweries/search**', {
+    cy.intercept('GET', '**/api.openbrewerydb.org/**', {
       body: [{
         id: '1',
         name: 'Test Brewery',
@@ -37,7 +39,8 @@ describe('Brewery Search', () => {
       }]
     }).as('searchBreweries');
 
-    cy.get('input[aria-label="Search brewery"]').type('test');
+    cy.get('input[aria-label="Search brewery"]').type('brewery');
+    cy.get('button').contains('Search').click();
     cy.wait('@searchBreweries');
     
     cy.contains('Test Brewery').should('be.visible');

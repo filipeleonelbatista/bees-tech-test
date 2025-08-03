@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Checkbox, Input } from '../../components';
 import { useUser } from '../../contexts/UserContext';
@@ -64,16 +64,6 @@ const Home: React.FC = () => {
       navigate('/places');
     }
   };
-
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      const { name, isAdult } = JSON.parse(user);
-      setName(name);
-      setIsAdult(isAdult);
-      navigate('/places');
-    }
-  }, []);
 
   return (
     <div className="min-h-screen bg-yellow-300/80 flex flex-col justify-center items-center p-4 relative">
