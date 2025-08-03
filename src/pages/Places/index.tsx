@@ -3,11 +3,10 @@ import { Button, Card, Input, Loading } from "../../components";
 import Navbar from "../../components/Navbar";
 import { useUser } from "../../contexts/UserContext";
 import { useBrewerySearch } from "../../hooks/useBrewerySearch";
-import { useEffect } from "react";
 
 const Places: React.FC = () => {
     const navigate = useNavigate();
-    const { name, isAdult, addFavorite, removeFavorite, breweryFavorites } = useUser();
+    const { name, addFavorite, removeFavorite, breweryFavorites } = useUser();
     const { search, setSearch, results, loading, handleSearch } = useBrewerySearch();
 
     const handleLogout = () => {
