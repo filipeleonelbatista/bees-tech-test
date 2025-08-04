@@ -13,7 +13,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [name, setName] = useState('');
     const [isAdult, setIsAdult] = useState(false);
     const [breweryFavorites, setBreweryFavorites] = useState<Brewery[]>([]);
-    const [favoritesLoaded, setFavoritesLoaded] = useState(false);
+    const [favoritesLoaded, setFavoritesLoaded] = useState(false);    
 
     useEffect(() => {
         const savedFavorites = localStorage.getItem('favorites');
@@ -74,6 +74,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
                 breweryFavorites,
                 addFavorite,
                 removeFavorite,
+                setBreweryFavorites,
             }}
         >
             {children}

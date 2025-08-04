@@ -125,4 +125,5 @@ interface UserContextProps {
   breweryFavorites: Brewery[];
   addFavorite: (brewery: Brewery) => void;
   removeFavorite: (id: string) => void;
+  setBreweryFavorites: (favorites: Brewery[]) => void;
 }

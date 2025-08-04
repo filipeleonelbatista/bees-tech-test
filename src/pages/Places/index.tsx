@@ -6,11 +6,13 @@ import { useBrewerySearch } from "../../hooks/useBrewerySearch";
 
 const Places: React.FC = () => {
     const navigate = useNavigate();
-    const { name, addFavorite, removeFavorite, breweryFavorites } = useUser();
+    const { name, setName, setIsAdult, setBreweryFavorites, addFavorite, removeFavorite, breweryFavorites } = useUser();
     const { search, setSearch, results, loading, handleSearch } = useBrewerySearch();
 
     const handleLogout = () => {
-        console.log('Logout');
+        setName('')
+        setIsAdult(false)
+        setBreweryFavorites([])
         localStorage.clear();
         navigate('/');
     };
